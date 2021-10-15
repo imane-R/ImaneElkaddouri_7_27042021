@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/svg" href="" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href=".css/style.css" />
+    <script src="https://kit.fontawesome.com/8730c06133.js" crossorigin="anonymous"></script>
+    <title>Les petits plats</title>
+</head>
+
+<body>
+    <header>
+        <img src="./images/logo.svg" alt="logo du site" class="logo-images" />
+        <h1 class="logo-title">Les petits plats</h1>
+    </header>
+    <section>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control"
+                placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+                aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+                aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="filtre">
+        <div class="element-select"></div>
+
+        <div class="filtre__container"></div>
+            <div class="recherche-secondaires recherche-par-ingredients">
+                <input type="search" placeholder="Ingrédients" class="recherche-par-ingredients__input" />
+                <img src="./images/arrow.svg" id="fleche-ingredients" alt="fleche" ; />
+                <ul class="liste-ingredients liste"></ul>
+            </div>
+            <div class="recherche-secondaires recherche-par-appareil">
+                <input
+                  type="search"
+                  placeholder="Appareil"
+                  class="recherche-par-appareil__input"
+                />
+                <img
+                  src="./images/arrow.svg"
+                  class="fleche-appareil"
+                  alt="fleche"
+                />
+                <ul class="liste-appareil liste"></ul>
+              </div>
+  
+              <div class="recherche-secondaires recherche-par-ustensiles">
+                <input
+                  type="search"
+                  placeholder="Ustensiles"
+                  class="recherche-par-ustensiles__input"
+                />
+                <img
+                  src="./images/arrow.svg"
+                  class="fleche-ustensiles"
+                  alt="fleche"
+                />
+                <ul class="liste-ustensiles liste"></ul>
+              </div>
+        </div>
+    </section>
+    <!-- Section 3 : Recipes Cartes -->
+    <section id="recipesCartes"></section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="data/recipes.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

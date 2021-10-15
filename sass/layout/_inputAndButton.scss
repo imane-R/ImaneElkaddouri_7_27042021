@@ -1,0 +1,100 @@
+
+.input-group{
+    margin: auto;
+    .form-control{
+        background-color: $input_bg_color;
+        border: none;
+        height: 48px;
+    }
+    .btn-outline-secondary{
+        border: none;
+        background-color:$input_bg_color ;
+    }
+}
+ 
+.filtre {
+    margin-bottom: 25px;
+      display: flex;
+  }
+  
+  .element-select {
+    display: flex;
+    margin-bottom: 20px;
+    &__ingredients {
+      background-color: $Ingredient_bg_color;
+    }
+    &__appareil {
+      background-color: $appareil_bg_color;
+    }
+    &__ustensiles {
+      background-color: $appareil_bg_color;
+    }
+    & bouton {
+      display: flex;
+      align-items: center;
+      height: 37px;
+      color: white;
+      border-radius: 5px;
+      padding-inline: 20px;
+      margin-right: 10px;
+      & img {
+        margin-left: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .recherche-secondaires {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    width: 170px;
+    height: 69px;
+    font-family: "lato", "roboto", sans-serif;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+    &::after {
+      display: none;
+    }
+    & input {
+      width: 80%;
+      height: 90%;
+      color: white;
+      font-size: 1.125rem;
+      border: none;
+      &::-webkit-search-cancel-button {
+        display: none;
+      }
+      &::placeholder,
+      &:focus-visible {
+        color: white;
+        outline: none;
+      }
+    }
+    & img {
+      cursor: pointer;
+    }
+  }
+  
+  .recherche-par-ingredients {
+    background-color: $Ingredient_bg_color ;
+    & input {
+      background-color: $Ingredient_bg_color;
+    }
+  }
+  .recherche-par-appareil {
+    background-color: $appareil_bg_color;
+    & input {
+      background-color: $appareil_bg_color;
+    }
+  }
+  .recherche-par-ustensiles {
+    background-color: $Ustensiles_bg_color;
+    & input {
+      background-color: $Ustensiles_bg_color;
+    }
+  }
