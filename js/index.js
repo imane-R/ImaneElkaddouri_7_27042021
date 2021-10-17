@@ -106,8 +106,8 @@ function getHtmlIngredients(ingredients) {
     let result = '<div class="carte__ingredients">' +
     '<ul class="contenu__ingredient__liste">';
     for (let i = 0 ; i < ingredients.length; i++) {
-        if (ingredients[i].quantity) {
-            result = result + '<li><b>' + ingredients[i].ingredient + ':</b>' + ingredients[i].quantity + '</li>';
+        if (ingredients[i].quantity ) {
+            result = result + '<li><b>' + ingredients[i].ingredient + ':</b>' + ingredients[i].quantity + ingredients[i].unit + '</li>';
         } else {
             result = result + '<li><b>' + ingredients[i].ingredient + '</b></li>';
         }
