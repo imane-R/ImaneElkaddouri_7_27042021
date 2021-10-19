@@ -147,44 +147,48 @@ function bindEvents() {
 
     document.querySelectorAll('.list-container li').forEach(element => {
         element.addEventListener('click', (e) => {
-            e.currentTarget.closest('.list-container').getAttribute('data-tag-type')
-            
+            let currentTagType = e.currentTarget.closest('.list-container').getAttribute('data-tag-type');
             let currentTagValue = e.currentTarget.innerHTML;
             let indexOfcurrentTagValue = selectedTags.map((tag) => tag.value).indexOf(currentTagValue)
 
-            if(indexOfcurrentTagValue == -1) {
+            if (indexOfcurrentTagValue == -1) {
                 selectedTags.push({
-                    type: e.currentTarget.closest('.list-container').getAttribute('data-tag-type'),
+                    type: currentTagType,
                     value: currentTagValue
                 });
             } else {
                 selectedTags.splice(indexOfcurrentTagValue, 1);
             }
-            drawSelectedTag();
+            drawSelectedTags();
         });
     });
 }
 
 
-function drawSelectedTag () {
+function drawSelectedTags() {
     let tagContainer = document.querySelector('.element-select');
     let result = "";
     selectedTags.forEach((tag) => {
-        result = result + '<div class=" tags ' + tag.type + '">' + tag.value + "  " +
-        '<img ' +
-        'src="./images/close.svg"' +
-        'class="close-tag"' +
-        'alt="close"' +
-        '/>' +
-        '</div>';
+        result = result + '<div class="tags ' + tag.type + '">' + tag.value + "  " +
+            '<img ' +
+            'src="./images/close.svg"' +
+            'class="close-tag"' +
+            'alt="close"' +
+            '/>' +
+            '</div>';
     });
 
     tagContainer.innerHTML = result;
+    bindTagsEvents();
+}
+
+function bindTagsEvents() {
     document.querySelectorAll('.tags').forEach(element => {
         element.addEventListener('click', (e) => {
-                e.currentTarget.style.display = 'none';
-                selectedTags.splice(element, 1);
-
+            let currentTagValue = e.currentTarget.innerHTML;
+            let indexOfcurrentTagValue = selectedTags.indexOf(currentTagValue)
+                selectedTags.splice(indexOfcurrentTagValue, 1);
+            drawSelectedTags();
+        });
     });
-});
 }
