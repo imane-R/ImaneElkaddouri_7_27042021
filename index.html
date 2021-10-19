@@ -34,39 +34,23 @@
     <section class="filtre">
         <div class="element-select"></div>
 
-        <div class="filtre__container"></div>
-            <div class="recherche-secondaires recherche-par-ingredients">
-                <input type="search" placeholder="Ingrédients" class="recherche-par-ingredients__input" />
-                <img src="./images/arrow.svg" id="fleche-ingredients" alt="fleche" ; />
-                <ul class="liste-ingredients liste"></ul>
-            </div>
-            <div class="recherche-secondaires recherche-par-appareil">
-                <input
-                  type="search"
-                  placeholder="Appareil"
-                  class="recherche-par-appareil__input"
-                />
-                <img
-                  src="./images/arrow.svg"
-                  class="fleche-appareil"
-                  alt="fleche"
-                />
-                <ul class="liste-appareil liste"></ul>
-              </div>
-  
-              <div class="recherche-secondaires recherche-par-ustensiles">
-                <input
-                  type="search"
-                  placeholder="Ustensiles"
-                  class="recherche-par-ustensiles__input"
-                />
-                <img
-                  src="./images/arrow.svg"
-                  class="fleche-ustensiles"
-                  alt="fleche"
-                />
-                <ul class="liste-ustensiles liste"></ul>
-              </div>
+        <div class="filtre__container">
+        <div class="recherche-secondaires recherche-par-ingredients">
+            <input type="search" placeholder="Ingrédients" />
+            <img src="./images/arrow.svg" id="fleche-ingredients" alt="fleche" ; />
+            <div  id="liste-of-ingredients" class="list-container" data-tag-type="ingredient"></div>
+        </div>
+        <div class="recherche-secondaires recherche-par-appareil">
+            <input type="search" placeholder="Appareil" />
+            <img src="./images/arrow.svg" id="fleche-appareil" alt="fleche" />
+            <div id="liste-appareil" class="list-container" data-tag-type="appliance"></div>
+        </div>
+
+        <div class="recherche-secondaires recherche-par-ustensiles">
+            <input type="search" placeholder="Ustensiles" />
+            <img src="./images/arrow.svg" id="fleche-ustensiles" alt="fleche" />
+            <div  id="liste-ustensiles" class="list-container" data-tag-type="ustensile"></div>
+        </div>
         </div>
     </section>
     <!-- Section 3 : Recipes Cartes -->

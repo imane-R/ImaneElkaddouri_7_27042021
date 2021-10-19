@@ -1,13 +1,14 @@
 let appliances = [];
 let ingredients = [];
 let ustensils = [];
-let ingredientsArrow = document.getElementById('fleche-ingredients')
-let listOfIngredients = document.getElementsByClassName('liste-ingredients')
+let selectedTags = [];
 
 
 initKeyWord();
 
 creatCartesOfRecipes(recipes);
+drawAllTags();
+bindEvents();
 
 //bring data from recipes.js file 
 function initAppliences() {
@@ -51,13 +52,12 @@ function initKeyWord() {
     initUstensils();
 }
 
-// creat list of ingredients
+function drawAllTags() {
+    drawTagsList(ingredients, "liste-of-ingredients");
+    drawTagsList(appliances, "liste-appareil");
+    drawTagsList(ustensils, 'liste-ustensiles');
+}
 
-/*ingredients.forEach(creatIngredientsList);
-function creatIngredientsList(ingredient) {
-listOfIngredients.innerHTML = '<li>' + ingredient + '</li>' ;
-};
-ingredientsArrow.addEventListener('click' ,creatIngredientsList )*/
 
 function creatCartesOfRecipes(arrayOfRecipes) {
     let creatOfRecipes = document.getElementById('recipesCartes');
@@ -65,7 +65,6 @@ function creatCartesOfRecipes(arrayOfRecipes) {
     for (let i = 0; i < arrayOfRecipes.length; i++) {
         htmlResult = htmlResult + getHtmlRecipeCard(arrayOfRecipes[i]);
     }
-
 
     creatOfRecipes.innerHTML = htmlResult;
 }
@@ -80,7 +79,7 @@ function getHtmlRecipeCard(recipe) {
         'alt="Illustration plat"' +
         '/>' +
         '</div>' +
-        '<div class= "recipe_informations">'+
+        '<div class= "recipe_informations">' +
         '<div class="carte_title">' +
         '<h2>' + recipe.name + '</h2>' +
         '</div>' +
@@ -89,7 +88,7 @@ function getHtmlRecipeCard(recipe) {
         'src="./images/cadran.svg"' +
         'alt="logo indiquant la durée"' +
         '/>' +
-        ' '+ recipe.time + 'min' +
+        ' ' + recipe.time + 'min' +
         '</p>' +
         '</div>' +
         getHtmlIngredients(recipe.ingredients) +
@@ -98,21 +97,94 @@ function getHtmlRecipeCard(recipe) {
         recipe.description +
         '</p>' +
         '</div>' +
-        '</div>'+
+        '</div>' +
         '</article>'
 }
 
 function getHtmlIngredients(ingredients) {
     let result = '<div class="carte__ingredients">' +
-    '<ul class="contenu__ingredient__liste">';
-    for (let i = 0 ; i < ingredients.length; i++) {
-        if (ingredients[i].quantity ) {
-            result = result + '<li><b>' + ingredients[i].ingredient + ':</b>' + ingredients[i].quantity + ingredients[i].unit + '</li>';
+        '<ul class="contenu__ingredient__liste">';
+    for (let i = 0; i < ingredients.length; i++) {
+        if (ingredients[i].quantity) {
+            if (ingredients[i].unit) {
+                result = result + '<li><b>' + ingredients[i].ingredient + ':</b> ' + ingredients[i].quantity + ' ' + ingredients[i].unit + '</li>';
+            } else {
+                result = result + '<li><b>' + ingredients[i].ingredient + ':</b> ' + ingredients[i].quantity + '</li>';
+            }
         } else {
             result = result + '<li><b>' + ingredients[i].ingredient + '</b></li>';
         }
-        
+
     }
-    result =  result + '</ul></div>';
+    result = result + '</ul></div>';
     return result;
+}
+
+
+function drawTagsList(ingredients, listCotainerId) {
+    let listContainer = document.getElementById(listCotainerId)
+    let result = '<ul>';
+    for (let i = 0; i < ingredients.length; i++) {
+        result = result + '<li>' + ingredients[i] + '</li>';
+    }
+    result = result + '</ul>';
+    listContainer.innerHTML = result;
+}
+
+function bindEvents() {
+    document.querySelectorAll('.recherche-secondaires').forEach(element => {
+        element.addEventListener('click', (e) => {
+            if (e.currentTarget.classList.contains('active')) {
+                e.currentTarget.classList.remove('active');
+            } else {
+                document.querySelectorAll('.recherche-secondaires').forEach((element) => {
+                    element.classList.remove('active');
+                });
+                e.currentTarget.classList.add('active');
+            }
+        });
+    });
+
+    document.querySelectorAll('.list-container li').forEach(element => {
+        element.addEventListener('click', (e) => {
+            e.currentTarget.closest('.list-container').getAttribute('data-tag-type')
+            
+            let currentTagValue = e.currentTarget.innerHTML;
+            let indexOfcurrentTagValue = selectedTags.map((tag) => tag.value).indexOf(currentTagValue)
+
+            if(indexOfcurrentTagValue == -1) {
+                selectedTags.push({
+                    type: e.currentTarget.closest('.list-container').getAttribute('data-tag-type'),
+                    value: currentTagValue
+                });
+            } else {
+                selectedTags.splice(indexOfcurrentTagValue, 1);
+            }
+            drawSelectedTag();
+        });
+    });
+}
+
+
+function drawSelectedTag () {
+    let tagContainer = document.querySelector('.element-select');
+    let result = "";
+    selectedTags.forEach((tag) => {
+        result = result + '<div class=" tags ' + tag.type + '">' + tag.value + "  " +
+        '<img ' +
+        'src="./images/close.svg"' +
+        'class="close-tag"' +
+        'alt="close"' +
+        '/>' +
+        '</div>';
+    });
+
+    tagContainer.innerHTML = result;
+    document.querySelectorAll('.tags').forEach(element => {
+        element.addEventListener('click', (e) => {
+                e.currentTarget.style.display = 'none';
+                selectedTags.splice(element, 1);
+
+    });
+});
 }

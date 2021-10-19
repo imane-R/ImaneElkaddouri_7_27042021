@@ -1,33 +1,29 @@
 .carte {
-    height: 349px;
     margin-bottom: 33px;
     background-color:  $card_bg_color;
+    width: 33%;
     .recipe_informations{
         position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 15px;
         .carte__duree{
-            position: absolute;
-            top: 10px;
-            right: 15px;
+            width: 50%;
+            display: flex;
+            justify-content: end;
         }
         .carte_title{
-            position: absolute;
-            top: 12px;
-            left: 11px;
+            width: 50%;
         }
-        .carte_recette_description{
-            position: absolute;
-            top: 48px;
+        .carte__recette{
             font-size: 10px;
             width: 50%;
             height: 109px;
-            right: 8px;
             text-align: left;
             overflow: hidden;
         }
         .carte__ingredients{
-            position: absolute;
-            left: 10px;
-            top:48px;
+            width: 50%;
             font-size: 10px;
         }
     }
