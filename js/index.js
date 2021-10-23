@@ -402,5 +402,10 @@ function updateSearchResultBySelectedTags() {
 //***************************************//
 
 function updateFiltredRecipesByFreeSearch(searchText) {
-    filtredRecipes = [...recipes];
+    filtredRecipes = [];
+    for (let i = 0 ; i < recipes.length ; i++){
+        if (recipes[i].description.toLocaleLowerCase().indexOf(searchText) !== -1 ){
+            filtredRecipes.push(recipes[i])
+        }
+    }
 }
