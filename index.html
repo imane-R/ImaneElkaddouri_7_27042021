@@ -21,7 +21,7 @@
     </header>
     <section>
         <div class="input-group mb-3">
-            <input type="text" class="form-control"
+            <input id="mainSearchInput" type="text" class="form-control"
                 placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
                 aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette"
                 aria-describedby="basic-addon2">
@@ -36,20 +36,20 @@
 
         <div class="filtre__container">
         <div class="recherche-secondaires recherche-par-ingredients">
-            <input type="search" placeholder="Ingrédients" />
+            <input id="ingredientsInput" type="search" placeholder="Ingrédients" />
             <img src="./images/arrow.svg" id="fleche-ingredients" alt="fleche" ; />
-            <div  id="liste-of-ingredients" class="list-container" data-tag-type="ingredient"></div>
+            <div  id="liste-of-ingredients" class="list-container" data-tag-type="ingredients"></div>
         </div>
         <div class="recherche-secondaires recherche-par-appareil">
-            <input type="search" placeholder="Appareil" />
+            <input id="appareilInput" type="search" placeholder="Appareil" />
             <img src="./images/arrow.svg" id="fleche-appareil" alt="fleche" />
-            <div id="liste-appareil" class="list-container" data-tag-type="appliance"></div>
+            <div id="liste-appareil" class="list-container" data-tag-type="appliances"></div>
         </div>
 
         <div class="recherche-secondaires recherche-par-ustensiles">
-            <input type="search" placeholder="Ustensiles" />
+            <input id="ustensilesInput" type="search" placeholder="Ustensiles" />
             <img src="./images/arrow.svg" id="fleche-ustensiles" alt="fleche" />
-            <div  id="liste-ustensiles" class="list-container" data-tag-type="ustensile"></div>
+            <div  id="liste-ustensiles" class="list-container" data-tag-type="ustensils"></div>
         </div>
         </div>
     </section>

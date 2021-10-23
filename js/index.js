@@ -1,31 +1,51 @@
 let appliances = [];
 let ingredients = [];
 let ustensils = [];
-let selectedTags = [];
+let selectedTags = {
+    appliances: [],
+    ingredients: [],
+    ustensils: []
+};
+let filtredRecipes = [];
 
+init();
 
-initKeyWord();
+function init() {
+    // init Data
+    initFiltredRecipes();
+    updateKeyWord();
 
-creatCartesOfRecipes(recipes);
-drawAllTags();
-bindEvents();
+    // draw data
+    creatCartesOfRecipes(filtredRecipes);
+    drawKeyWordList();
+
+    // bind events
+    bindMainEvents();
+    bindTagSelectionEvent();
+}
+
+function initFiltredRecipes() {
+    filtredRecipes = [...recipes];
+}
 
 //bring data from recipes.js file 
-function initAppliences() {
+function updateAppliences() {
     let appliance;
-    for (let i = 0; i < recipes.length; i++) {
-        appliance = recipes[i].appliance.toLowerCase();
+    appliances = [];
+    for (let i = 0; i < filtredRecipes.length; i++) {
+        appliance = filtredRecipes[i].appliance.toLowerCase();
         if (appliances.indexOf(appliance) == -1) {
             appliances.push(appliance)
         }
     }
 }
 
-function initIngredients() {
+function updateIngredients() {
     let ingredient;
-    for (let i = 0; i < recipes.length; i++) {
-        for (let j = 0; j < recipes[i].ingredients.length; j++) {
-            ingredient = recipes[i].ingredients[j].ingredient.toLowerCase();
+    ingredients = [];
+    for (let i = 0; i < filtredRecipes.length; i++) {
+        for (let j = 0; j < filtredRecipes[i].ingredients.length; j++) {
+            ingredient = filtredRecipes[i].ingredients[j].ingredient.toLowerCase();
             if (ingredients.indexOf(ingredient) == -1) {
                 ingredients.push(ingredient)
             }
@@ -34,11 +54,12 @@ function initIngredients() {
 }
 
 
-function initUstensils() {
+function updateUstensils() {
     let ustensil;
-    for (let i = 0; i < recipes.length; i++) {
-        for (let j = 0; j < recipes[i].ustensils.length; j++) {
-            ustensil = recipes[i].ustensils[j].toLowerCase();
+    ustensils = [];
+    for (let i = 0; i < filtredRecipes.length; i++) {
+        for (let j = 0; j < filtredRecipes[i].ustensils.length; j++) {
+            ustensil = filtredRecipes[i].ustensils[j].toLowerCase();
             if (ustensils.indexOf(ustensil) == -1) {
                 ustensils.push(ustensil)
             }
@@ -46,16 +67,60 @@ function initUstensils() {
     }
 }
 
-function initKeyWord() {
-    initAppliences();
-    initIngredients();
-    initUstensils();
+function updateKeyWord() {
+    updateAppliences();
+    updateIngredients();
+    updateUstensils();
 }
 
-function drawAllTags() {
-    drawTagsList(ingredients, "liste-of-ingredients");
-    drawTagsList(appliances, "liste-appareil");
-    drawTagsList(ustensils, 'liste-ustensiles');
+function drawKeyWordList() {
+    drawKeyWord(ingredients, "liste-of-ingredients");
+    drawKeyWord(appliances, "liste-appareil");
+    drawKeyWord(ustensils, 'liste-ustensiles');
+}
+
+function filterIngredientsByInput(e){
+    let searchText = e.currentTarget.value.toLowerCase();
+
+    // update data
+    let filtredIngredients = ingredients.filter((ingredient) => {
+        return ingredient.indexOf(searchText) !== -1;
+    });
+
+    // draw data
+    drawKeyWord(filtredIngredients, "liste-of-ingredients");
+
+    // bind events
+    bindTagSelectionEvent('#liste-of-ingredients li');
+}
+function filterAppliancesByInput(e){
+    let searchText = e.currentTarget.value.toLowerCase();
+
+    // update data
+    let filtredAppliances = appliances.filter((appliance) => {
+        return appliance.indexOf(searchText) !== -1;
+    });
+
+    // draw data
+    drawKeyWord(filtredAppliances, "liste-appareil");
+
+    // bind events
+    bindTagSelectionEvent('#liste-appareil li');
+}
+
+function filterUstensilsByInput(e){
+    let searchText = e.currentTarget.value.toLowerCase();
+
+    // update data
+    let filtredUstensils = ustensils.filter((ustensil) => {
+        return ustensil.indexOf(searchText) !== -1;
+    });
+
+    // draw data
+    drawKeyWord(filtredUstensils, "liste-ustensiles");
+
+    // bind events
+    bindTagSelectionEvent('#liste-ustensiles li');
 }
 
 
@@ -121,7 +186,7 @@ function getHtmlIngredients(ingredients) {
 }
 
 
-function drawTagsList(ingredients, listCotainerId) {
+function drawKeyWord(ingredients, listCotainerId) {
     let listContainer = document.getElementById(listCotainerId)
     let result = '<ul>';
     for (let i = 0; i < ingredients.length; i++) {
@@ -131,45 +196,82 @@ function drawTagsList(ingredients, listCotainerId) {
     listContainer.innerHTML = result;
 }
 
-function bindEvents() {
-    document.querySelectorAll('.recherche-secondaires').forEach(element => {
-        element.addEventListener('click', (e) => {
-            if (e.currentTarget.classList.contains('active')) {
-                e.currentTarget.classList.remove('active');
-            } else {
-                document.querySelectorAll('.recherche-secondaires').forEach((element) => {
-                    element.classList.remove('active');
-                });
-                e.currentTarget.classList.add('active');
-            }
+function bindTagSelectionEvent(selector) {
+    if (selector) {
+        document.querySelectorAll(selector).forEach(element => {
+            element.addEventListener('click', updateSelectedTags);
         });
-    });
-
-    document.querySelectorAll('.list-container li').forEach(element => {
-        element.addEventListener('click', (e) => {
-            let currentTagType = e.currentTarget.closest('.list-container').getAttribute('data-tag-type');
-            let currentTagValue = e.currentTarget.innerHTML;
-            let indexOfcurrentTagValue = selectedTags.map((tag) => tag.value).indexOf(currentTagValue)
-
-            if (indexOfcurrentTagValue == -1) {
-                selectedTags.push({
-                    type: currentTagType,
-                    value: currentTagValue
-                });
-            } else {
-                selectedTags.splice(indexOfcurrentTagValue, 1);
-            }
-            drawSelectedTags();
+    } else {
+        document.querySelectorAll('.list-container li').forEach(element => {
+            element.addEventListener('click', updateSelectedTags);
         });
-    });
+    }
 }
 
+function bindMainEvents() {
+    document.querySelectorAll('.recherche-secondaires').forEach(element => {
+        element.addEventListener('click', toggleKeyWordDropDown);
+    });
+    document.querySelector('#mainSearchInput').addEventListener('input', updateSearchResultByFreeSearch);
+    document.querySelector('#ingredientsInput').addEventListener('input', filterIngredientsByInput );
+    document.querySelector('#appareilInput').addEventListener('input', filterAppliancesByInput);
+    document.querySelector('#ustensilesInput').addEventListener('input',filterUstensilsByInput);
+}
+
+
+function updateSelectedTags(e) {
+    // reset text input
+    e.currentTarget.closest('.recherche-secondaires').querySelector('input').value = ''
+    
+    let currentTagType = e.currentTarget.closest('.list-container').getAttribute('data-tag-type');
+    let currentTagValue = e.currentTarget.innerHTML;
+    let indexOfCurrentTag = selectedTags[currentTagType].indexOf(currentTagValue);
+
+    if (indexOfCurrentTag == -1) {
+        selectedTags[currentTagType].push(currentTagValue);
+    } else {
+        selectedTags[currentTagType].splice(indexOfCurrentTag, 1);
+    }
+    drawSelectedTags();
+}
+
+function toggleKeyWordDropDown(e) {
+    if (e.currentTarget.classList.contains('active')) {
+        e.currentTarget.classList.remove('active');
+    } else {
+        document.querySelectorAll('.recherche-secondaires').forEach((element) => {
+            element.classList.remove('active');
+        });
+        e.currentTarget.classList.add('active');
+    }
+}
 
 function drawSelectedTags() {
     let tagContainer = document.querySelector('.element-select');
     let result = "";
-    selectedTags.forEach((tag) => {
-        result = result + '<div class="tags ' + tag.type + '">' + tag.value + "  " +
+
+    selectedTags.ingredients.forEach((tag) => {
+        result = result + '<div class="tags ingredients" data-tag-type="ingredients" data-tag-value="' + tag + '">' + tag + "  " +
+            '<img ' +
+            'src="./images/close.svg"' +
+            'class="close-tag"' +
+            'alt="close"' +
+            '/>' +
+            '</div>';
+    });
+
+    selectedTags.appliances.forEach((tag) => {
+        result = result + '<div class="tags appliances" data-tag-type="appliances" data-tag-value="' + tag + '">' + tag + "  " +
+            '<img ' +
+            'src="./images/close.svg"' +
+            'class="close-tag"' +
+            'alt="close"' +
+            '/>' +
+            '</div>';
+    });
+
+    selectedTags.ustensils.forEach((tag) => {
+        result = result + '<div class="tags ustensils" data-tag-type="ustensils" data-tag-value="' + tag + '">' + tag + "  " +
             '<img ' +
             'src="./images/close.svg"' +
             'class="close-tag"' +
@@ -180,15 +282,125 @@ function drawSelectedTags() {
 
     tagContainer.innerHTML = result;
     bindTagsEvents();
+    updateSearchResultBySelectedTags();
 }
 
 function bindTagsEvents() {
     document.querySelectorAll('.tags').forEach(element => {
         element.addEventListener('click', (e) => {
-            let currentTagValue = e.currentTarget.innerHTML;
-            let indexOfcurrentTagValue = selectedTags.indexOf(currentTagValue)
-                selectedTags.splice(indexOfcurrentTagValue, 1);
+            let currentTagType = e.currentTarget.getAttribute('data-tag-type');
+            let currentTagValue = e.currentTarget.getAttribute('data-tag-value');
+            let indexOfCurrentTag = selectedTags[currentTagType].indexOf(currentTagValue)
+            selectedTags[currentTagType].splice(indexOfCurrentTag, 1);
             drawSelectedTags();
         });
     });
+}
+
+function updateSearchResultByFreeSearch(e) {
+    let searchText = e.currentTarget.value || '';
+    if (searchText.length < 3) {
+        return;
+    }
+    // update Data
+    updateFiltredRecipesByFreeSearch(searchText.toLowerCase());
+    updateKeyWord();
+
+    // draw data
+    creatCartesOfRecipes(filtredRecipes);
+    drawKeyWordList();
+
+    //bind event
+    bindTagSelectionEvent();
+
+}
+
+function updateFiltredRecipesBySelectedTags() {
+    let result = [];
+    for (let i = 0; i < filtredRecipes.length; i++) {
+        if (isCurrentRecipeUseAtLeastOneOfSelectedAppliances(filtredRecipes[i])) {
+            if (isAllSelectedIngredientsInTheCurrentRecipe(filtredRecipes[i])) {
+                if (isAllSelectedUstensilsUsedInTheCurrentRecipe(filtredRecipes[i])) {
+                    result.push(filtredRecipes[i]);
+                }
+            }
+        }
+    }
+
+    filtredRecipes = result;
+
+
+    function isCurrentRecipeUseAtLeastOneOfSelectedAppliances(recipe) {
+
+        if (selectedTags.appliances.length == 0) {
+            return true;
+        }
+        return selectedTags.appliances.indexOf(recipe.appliance.toLowerCase()) !== -1;
+    }
+
+    function isAllSelectedIngredientsInTheCurrentRecipe(recipe) {
+        if (selectedTags.ingredients.length == 0) {
+            return true;
+        }
+        let ingredientsOfCurrentRecipe = [];
+        for (let i = 0 ; i < recipe.ingredients.length ; i++){
+            ingredientsOfCurrentRecipe.push(recipe.ingredients[i].ingredient.toLowerCase())
+        }
+
+        let result = true;
+        let i = 0; 
+        while (result && i < selectedTags.ingredients.length) {
+            if (ingredientsOfCurrentRecipe.indexOf(selectedTags.ingredients[i]) == -1 ){
+                result = false;
+            }
+            i++;
+        }
+
+        return result;
+    }
+
+    function isAllSelectedUstensilsUsedInTheCurrentRecipe(recipe) {
+        if (selectedTags.ustensils.length == 0) {
+            return true;
+        }
+        let ustensilsOfCurrentRecipe = [];
+        for (let i = 0 ; i < recipe.ustensils.length ; i++){
+            ustensilsOfCurrentRecipe.push(recipe.ustensils[i].toLowerCase())
+        }
+
+        let result = true;
+        let i = 0; 
+        while (result && i < selectedTags.ustensils.length) {
+            if (ustensilsOfCurrentRecipe.indexOf(selectedTags.ustensils[i]) == -1 ){
+                result = false;
+            }
+            i++;
+        }
+
+        return result;
+    }
+}
+
+
+
+function updateSearchResultBySelectedTags() {
+    // update data
+    updateFiltredRecipesByFreeSearch(document.querySelector('#mainSearchInput').value);
+    updateFiltredRecipesBySelectedTags();
+    updateKeyWord();
+
+    // draw data
+    creatCartesOfRecipes(filtredRecipes);
+    drawKeyWordList();
+
+    //bind event
+    bindTagSelectionEvent();
+}
+
+//***************************************//
+// To Be Implemented in 2 diffrent ways
+//***************************************//
+
+function updateFiltredRecipesByFreeSearch(searchText) {
+    filtredRecipes = [...recipes];
 }
