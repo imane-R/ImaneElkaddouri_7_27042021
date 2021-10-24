@@ -404,6 +404,12 @@ function updateSearchResultBySelectedTags() {
 //***************************************//
 
 function updateFiltredRecipesByFreeSearch(searchText) {
+
+    if (searchText.length < 3) {
+        filtredRecipes = [...recipes];
+        return;
+    }
+    
     filtredRecipes = [];
 
     for (let i = 0; i < recipes.length; i++) {
