@@ -79,7 +79,7 @@ function drawKeyWordList() {
     drawKeyWord(ustensils, 'liste-ustensiles');
 }
 
-function filterIngredientsByInput(e){
+function filterIngredientsByInput(e) {
     let searchText = e.currentTarget.value.toLowerCase();
 
     // update data
@@ -93,7 +93,7 @@ function filterIngredientsByInput(e){
     // bind events
     bindTagSelectionEvent('#liste-of-ingredients li');
 }
-function filterAppliancesByInput(e){
+function filterAppliancesByInput(e) {
     let searchText = e.currentTarget.value.toLowerCase();
 
     // update data
@@ -108,7 +108,7 @@ function filterAppliancesByInput(e){
     bindTagSelectionEvent('#liste-appareil li');
 }
 
-function filterUstensilsByInput(e){
+function filterUstensilsByInput(e) {
     let searchText = e.currentTarget.value.toLowerCase();
 
     // update data
@@ -213,16 +213,16 @@ function bindMainEvents() {
         element.addEventListener('click', toggleKeyWordDropDown);
     });
     document.querySelector('#mainSearchInput').addEventListener('input', updateSearchResultByFreeSearch);
-    document.querySelector('#ingredientsInput').addEventListener('input', filterIngredientsByInput );
+    document.querySelector('#ingredientsInput').addEventListener('input', filterIngredientsByInput);
     document.querySelector('#appareilInput').addEventListener('input', filterAppliancesByInput);
-    document.querySelector('#ustensilesInput').addEventListener('input',filterUstensilsByInput);
+    document.querySelector('#ustensilesInput').addEventListener('input', filterUstensilsByInput);
 }
 
 
 function updateSelectedTags(e) {
     // reset text input
     e.currentTarget.closest('.recherche-secondaires').querySelector('input').value = ''
-    
+
     let currentTagType = e.currentTarget.closest('.list-container').getAttribute('data-tag-type');
     let currentTagValue = e.currentTarget.innerHTML;
     let indexOfCurrentTag = selectedTags[currentTagType].indexOf(currentTagValue);
@@ -343,14 +343,14 @@ function updateFiltredRecipesBySelectedTags() {
             return true;
         }
         let ingredientsOfCurrentRecipe = [];
-        for (let i = 0 ; i < recipe.ingredients.length ; i++){
+        for (let i = 0; i < recipe.ingredients.length; i++) {
             ingredientsOfCurrentRecipe.push(recipe.ingredients[i].ingredient.toLowerCase())
         }
 
         let result = true;
-        let i = 0; 
+        let i = 0;
         while (result && i < selectedTags.ingredients.length) {
-            if (ingredientsOfCurrentRecipe.indexOf(selectedTags.ingredients[i]) == -1 ){
+            if (ingredientsOfCurrentRecipe.indexOf(selectedTags.ingredients[i]) == -1) {
                 result = false;
             }
             i++;
@@ -364,14 +364,14 @@ function updateFiltredRecipesBySelectedTags() {
             return true;
         }
         let ustensilsOfCurrentRecipe = [];
-        for (let i = 0 ; i < recipe.ustensils.length ; i++){
+        for (let i = 0; i < recipe.ustensils.length; i++) {
             ustensilsOfCurrentRecipe.push(recipe.ustensils[i].toLowerCase())
         }
 
         let result = true;
-        let i = 0; 
+        let i = 0;
         while (result && i < selectedTags.ustensils.length) {
-            if (ustensilsOfCurrentRecipe.indexOf(selectedTags.ustensils[i]) == -1 ){
+            if (ustensilsOfCurrentRecipe.indexOf(selectedTags.ustensils[i]) == -1) {
                 result = false;
             }
             i++;
@@ -403,9 +403,16 @@ function updateSearchResultBySelectedTags() {
 
 function updateFiltredRecipesByFreeSearch(searchText) {
     filtredRecipes = [];
-    for (let i = 0 ; i < recipes.length ; i++){
-        if (recipes[i].description.toLocaleLowerCase().indexOf(searchText) !== -1 ){
-            filtredRecipes.push(recipes[i])
+
+    for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i].description.toLowerCase().indexOf(searchText) !== -1) {
+            filtredRecipes.push(recipes[i]);
+            continue;
         }
+        if (recipes[i].name.toLowerCase().indexOf(searchText) !== -1) {
+            filtredRecipes.push(recipes[i]);
+            continue;
+        }
+        
     }
 }
