@@ -402,7 +402,12 @@ function updateSearchResultBySelectedTags() {
 //***************************************//
 
 function updateFiltredRecipesByFreeSearch(searchText) {
+<<<<<<< HEAD
     filtredRecipes = recipes.filter((recipe) => {
         return recipe.description.toLowerCase().indexOf(searchText) !== -1
     });
 }
+=======
+    filtredRecipes = [...recipes];
+}
+>>>>>>> main
