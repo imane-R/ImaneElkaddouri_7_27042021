@@ -411,9 +411,8 @@ function updateFiltredRecipesByFreeSearch(searchText) {
     }
 
     filtredRecipes = recipes.filter((recipe) => {
-        return recipe.description.toLowerCase().indexOf(searchText) !== -1
-    });
-    filtredRecipes = recipes.filter((recipe) => {
-        return recipe.name.toLowerCase().indexOf(searchText) !== -1
+        let isDescriptionMatching = recipe.description.toLowerCase().indexOf(searchText) !== -1;
+        let isNameMatching = recipe.name.toLowerCase().indexOf(searchText) !== -1;
+        return  isDescriptionMatching || isNameMatching;
     });
 }
