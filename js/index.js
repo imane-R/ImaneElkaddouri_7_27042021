@@ -412,7 +412,19 @@ function updateFiltredRecipesByFreeSearch(searchText) {
 
     filtredRecipes = recipes.filter((recipe) => {
         let isDescriptionMatching = recipe.description.toLowerCase().indexOf(searchText) !== -1;
+        if (isDescriptionMatching) {
+            return true;
+        }
+
         let isNameMatching = recipe.name.toLowerCase().indexOf(searchText) !== -1;
-        return  isDescriptionMatching || isNameMatching;
+        if (isNameMatching) {
+            return true;
+        }
+
+        let isIngredientsMatching = recipe.ingredients.filter((ingredient) => {
+            return ingredient.ingredient.toLowerCase().indexOf(searchText) !== -1;
+        }).length > 0;
+
+        return isIngredientsMatching;
     });
 }
