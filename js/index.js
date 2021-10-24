@@ -25,7 +25,7 @@ function init() {
 }
 
 function initFiltredRecipes() {
-    filtredRecipes = [...recipes];
+    filtredRecipes = recipes;
 }
 
 //bring data from recipes.js file 
@@ -300,7 +300,9 @@ function bindTagsEvents() {
 function updateSearchResultByFreeSearch(e) {
     let searchText = e.currentTarget.value || '';
     if (searchText.length < 3) {
-        return;
+        if (filtredRecipes.length === recipes.length) {
+            return;
+        }
     }
     // update Data
     updateFiltredRecipesByFreeSearch(searchText.toLowerCase());
