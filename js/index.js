@@ -409,7 +409,7 @@ function updateFiltredRecipesByFreeSearch(searchText) {
         filtredRecipes = recipes;
         return;
     }
-    
+
     filtredRecipes = [];
 
     for (let i = 0; i < recipes.length; i++) {
@@ -421,6 +421,10 @@ function updateFiltredRecipesByFreeSearch(searchText) {
             filtredRecipes.push(recipes[i]);
             continue;
         }
-        
+        for (let j = 0; j < recipes[i].ingredients.length; j++) {
+            if (recipes[i].ingredients[j].ingredient.toLowerCase().indexOf(searchText) !== -1) {
+                filtredRecipes.push(recipes[i]);
+            }
+        }
     }
 }
