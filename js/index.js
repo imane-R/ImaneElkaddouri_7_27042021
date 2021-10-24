@@ -424,6 +424,7 @@ function updateFiltredRecipesByFreeSearch(searchText) {
         for (let j = 0; j < recipes[i].ingredients.length; j++) {
             if (recipes[i].ingredients[j].ingredient.toLowerCase().indexOf(searchText) !== -1) {
                 filtredRecipes.push(recipes[i]);
+                break;
             }
         }
     }
