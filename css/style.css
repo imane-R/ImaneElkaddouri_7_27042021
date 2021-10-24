@@ -115,6 +115,8 @@ header {
 }
 .recherche-secondaires.active .list-container {
   display: block;
+  max-height: 400px;
+  overflow: scroll;
 }
 .recherche-secondaires::after {
   display: none;
