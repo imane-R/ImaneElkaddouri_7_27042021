@@ -25,7 +25,7 @@ function init() {
 }
 
 function initFiltredRecipes() {
-    filtredRecipes = [...recipes];
+    filtredRecipes = recipes;
 }
 
 //bring data from recipes.js file 
@@ -404,5 +404,5 @@ function updateSearchResultBySelectedTags() {
 //***************************************//
 
 function updateFiltredRecipesByFreeSearch(searchText) {
-    filtredRecipes = [...recipes];
+    filtredRecipes = recipes;
 }
