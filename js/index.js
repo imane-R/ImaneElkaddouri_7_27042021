@@ -300,7 +300,9 @@ function bindTagsEvents() {
 function updateSearchResultByFreeSearch(e) {
     let searchText = e.currentTarget.value || '';
     if (searchText.length < 3) {
-        return;
+        if (filtredRecipes.length === recipes.length) {
+            return;
+        }
     }
     // update Data
     updateFiltredRecipesByFreeSearch(searchText.toLowerCase());
