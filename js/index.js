@@ -405,7 +405,7 @@ function updateSearchResultBySelectedTags() {
 
 function updateFiltredRecipesByFreeSearch(searchText) {
 
-    if (searchText.length < 3) {
+    if (searchText.length < 3 && filtredRecipes.length != recipes.length) {
         filtredRecipes = [...recipes];
         return;
     }
