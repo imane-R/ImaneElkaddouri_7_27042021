@@ -421,10 +421,10 @@ function updateFiltredRecipesByFreeSearch(searchText) {
             return true;
         }
 
-        let isIngredientsMatching = recipe.ingredients.filter((ingredient) => {
+        let isIngredientsMatching = recipe.ingredients.find(findByIngredient) !== undefined;
+           function findByIngredient(ingredient){
             return ingredient.ingredient.toLowerCase().indexOf(searchText) !== -1;
-        }).length > 0;
-
+           }
         return isIngredientsMatching;
     });
 }
