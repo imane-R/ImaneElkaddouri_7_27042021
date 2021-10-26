@@ -129,10 +129,11 @@ function creatCartesOfRecipes(arrayOfRecipes) {
     let htmlResult = "";
     console.log(arrayOfRecipes);
     if (!arrayOfRecipes.length) {
-        document.getElementById( 'alertNoRecipeFounded' ).style.display = 'block';
+        document.getElementById('alertNoRecipeFounded').style.display = 'block';
     }
     for (let i = 0; i < arrayOfRecipes.length; i++) {
-            htmlResult = htmlResult + getHtmlRecipeCard(arrayOfRecipes[i]);
+        document.getElementById('alertNoRecipeFounded').style.display = 'none';
+        htmlResult = htmlResult + getHtmlRecipeCard(arrayOfRecipes[i]);
     }
     creatOfRecipes.innerHTML = htmlResult;
 }
