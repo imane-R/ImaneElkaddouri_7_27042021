@@ -128,9 +128,12 @@ function creatCartesOfRecipes(arrayOfRecipes) {
     let creatOfRecipes = document.getElementById('recipesCartes');
     let htmlResult = "";
     for (let i = 0; i < arrayOfRecipes.length; i++) {
-        htmlResult = htmlResult + getHtmlRecipeCard(arrayOfRecipes[i]);
+        if( arrayOfRecipes.length == 0){
+            document.querySelector( '.alert').style.display = 'block';
+        }else{
+            htmlResult = htmlResult + getHtmlRecipeCard(arrayOfRecipes[i]);
+        }
     }
-
     creatOfRecipes.innerHTML = htmlResult;
 }
 

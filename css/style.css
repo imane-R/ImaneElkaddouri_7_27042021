@@ -206,6 +206,10 @@ header {
   background-color: #ED6454;
 }
 
+.alert {
+  display: none;
+}
+
 .carte {
   margin-bottom: 33px;
   background-color: #E7E7E7;
