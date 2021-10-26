@@ -18,40 +18,40 @@
         <img src="./images/logo.svg" alt="logo du site" class="logo-images" />
         <h1 class="logo-title">Les petits plats</h1>
     </header>
-        <div class="input-group mb-3">
-            <input id="mainSearchInput" type="text" class="form-control"
-                placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
-                aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
-            </div>
+    <div class="input-group mb-3">
+        <input id="mainSearchInput" type="text" class="form-control"
+            placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+            aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
         </div>
+    </div>
 
     <div class="filtre">
         <div class="element-select"></div>
         <div class="filtre__container">
-        <div class="recherche-secondaires recherche-par-ingredients">
-            <input id="ingredientsInput" type="search" placeholder="Ingrédients" />
-            <img src="./images/arrow.svg" id="fleche-ingredients" alt="fleche" />
-            <div  id="liste-of-ingredients" class="list-container" data-tag-type="ingredients"></div>
-        </div>
-        <div class="recherche-secondaires recherche-par-appareil">
-            <input id="appareilInput" type="search" placeholder="Appareil" />
-            <img src="./images/arrow.svg" id="fleche-appareil" alt="fleche" />
-            <div id="liste-appareil" class="list-container" data-tag-type="appliances"></div>
-        </div>
+            <div class="recherche-secondaires recherche-par-ingredients">
+                <input id="ingredientsInput" type="search" placeholder="Ingrédients" />
+                <img src="./images/arrow.svg" id="fleche-ingredients" alt="fleche" />
+                <div id="liste-of-ingredients" class="list-container" data-tag-type="ingredients"></div>
+            </div>
+            <div class="recherche-secondaires recherche-par-appareil">
+                <input id="appareilInput" type="search" placeholder="Appareil" />
+                <img src="./images/arrow.svg" id="fleche-appareil" alt="fleche" />
+                <div id="liste-appareil" class="list-container" data-tag-type="appliances"></div>
+            </div>
 
-        <div class="recherche-secondaires recherche-par-ustensiles">
-            <input id="ustensilesInput" type="search" placeholder="Ustensiles" />
-            <img src="./images/arrow.svg" id="fleche-ustensiles" alt="fleche" />
-            <div  id="liste-ustensiles" class="list-container" data-tag-type="ustensils"></div>
-        </div>
+            <div class="recherche-secondaires recherche-par-ustensiles">
+                <input id="ustensilesInput" type="search" placeholder="Ustensiles" />
+                <img src="./images/arrow.svg" id="fleche-ustensiles" alt="fleche" />
+                <div id="liste-ustensiles" class="list-container" data-tag-type="ustensils"></div>
+            </div>
         </div>
     </div>
     <!-- Section 3 : Recipes Cartes -->
-    <div class="alert alert-info" role="alert">
+    <div id="alertNoRecipeFounded" class="alert alert-info" role="alert">
         Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson ».
-      </div>
+    </div>
     <div id="recipesCartes"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

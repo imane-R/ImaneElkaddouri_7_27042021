@@ -206,7 +206,7 @@ header {
   background-color: #ED6454;
 }
 
-.alert {
+#alertNoRecipeFounded {
   display: none;
 }
 
